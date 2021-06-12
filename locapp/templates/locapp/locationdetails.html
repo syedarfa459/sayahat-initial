@@ -1,0 +1,125 @@
+{% extends 'locapp/base.html' %}
+{% block body %}
+{% load static %}
+
+{% for detail in dest_details %}
+
+<div class="container mt-4">
+  <div class="container text-center">
+    <h1 style="margin: 1em 0 0.5em 0;
+    color:#e74c3c;   
+    font-size: 40px;
+    text-transform: uppercase;
+    position:absolute;
+      top:100%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      opacity:0.8;
+      z-index:-1;"> DETAILS WITH MAP</h1>
+  </div>
+      <div class="row" style="padding-top: 105px;">
+          <div class="col-lg-4" style="padding-top: 0px;" >
+        <div style="background:linear-gradient(rgba(4,9,30,.1),rgba(4,9,30,.5)),url({{detail.destinationImage.url}});background-size:cover;height: 350px;width: 700px;">
+                    <div class="text-box ">
+                      <h1 class=" py-3">{{detail.destination_name}}</h1>
+                      <a target="_blank" href="https://www.google.com/maps/dir/{{tourist_lat}},{{tourist_lon}}/{{dest_lat}},{{dest_lon}}/" class="hero-btn">GET DIRECTIONS</a>
+                    </div>
+        </div>
+          </div>
+        <div class="col-lg-8" style="margin-top:0px; padding-left: 285px;">
+            <!-- <div class="container mt-5" style="float:right;width:500;height:700;background-color:red"> -->
+                    {{map|safe}}
+                <!-- </div> -->
+        </div>
+      </div>
+</div>
+
+
+
+<div class="container mt-5">
+  <div class="container text-center mt-5">
+    <h1 style="margin: 1em 0 0.5em 0;
+    color:#e74c3c;   
+    font-size: 40px;
+    text-transform: uppercase;
+    position:absolute;
+      top:100%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      opacity:0.8;
+      z-index:-1;"> EXTRA INFO</h1>
+  </div>
+<div class="row" data-aos="fade-right" style="padding-top: 60px;">
+  <div class="col-lg-6">
+    <div class="myJumbotron container-fluid d-flex justify-content-center bg-white shadow mt-5" style="width: 700px;" >
+
+        <section class="py-1">
+            <h1 class="text-center" style="color:#bcc550">Minimum distance from your location: {{distance |floatformat:2}} km</h1>
+            <h3 class="px-3 heading-orange" style="text-align: left;margin: 1em 0 0.5em 0;
+            font-weight: normal;
+            font-family: 'Ultra', sans-serif;   
+            text-transform: uppercase;
+            text-shadow: 0 2px white, 0 3px #777;">About</h3>
+            <p class="px-3 h4" style="text-align:justify"><em>{{detail.destination_desc}}</em>
+            </p>
+          
+        </section>
+    </div>
+  </div>
+    <div class="col-lg-6 mt-5" style="padding-left:70px;">
+      <div class="gallery" style="cursor: pointer;" >
+       
+          <img class="img-fluid rounded" src="{% static 'images/pak.jpg' %}" alt="Cinque Terre" width="500" height="660">
+      
+      </div>
+    </div>
+</div>
+</div>
+{%endfor%}
+
+
+{% if dest_meta_details %}
+<section id="featured">
+    <div class="container mb-5 mt-5" data-aos="fade-left">
+      <div class="title py-2">
+        <h4 class="title-primary">Nearby Destinations</h4>
+        <h1 class="h1 h1-responsive title-secondary">Explore New Places</h1>
+        <br>
+      </div>
+      <div class="row px-0 d-flex justify-content-center">
+      {%for detail in dest_meta_details%}
+        <div class="col-lg-3 px-1">
+          <div class="card-design">
+            <div class="image">
+              <img src="{{detail.meta_destination_Image.url}}" alt="">
+            </div>
+            <div class="card-text shadow">
+              <div class="item">
+                <span><i class="fas fa-star"></i>({{detail.place_rating}})</span>
+                <h4 class="h4">{{detail.meta_destination_name}}</h4>
+              </div>
+              <div class="px-1">
+              
+                <a class="item" href="{%url 'locapp:loc_meta_detail' pk=detail.id %}"><button style="width: 110px;" class="btn">View Info</button></a>
+                <div class="py-2">
+                <a class="item"  href="{%url 'locapp:addRating' %}"><button  class="btn">Rate Place</button></a>
+              </div>
+            </div>
+            
+
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+
+
+    </div>
+
+  </section>
+  {%else%}
+  <div style="margin-bottom: 130px;"></div>
+{%endif%}
+
+{% endblock body %}
+

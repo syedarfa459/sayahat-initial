@@ -1,0 +1,68 @@
+{% extends 'locapp/base.html' %}
+{% block body %}
+
+
+<div class="container mt-4">
+  <div class="container text-center">
+    <h1 style="margin: 1em 0 0.5em 0;
+    color:#e74c3c;   
+    font-size: 40px;
+    text-transform: uppercase;
+    position:absolute;
+      top:100%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      opacity:0.8;
+      z-index:-1;"> DETAILS WITH MAP</h1>
+  </div>
+  {% for detail in dest_meta_details %}
+    <div class="row" style="padding-top: 116px;">
+        <div class="col-lg-6" style="padding-left: 110px;">
+      <div style="background:linear-gradient(rgba(4,9,30,.1),rgba(4,9,30,.5)),url({{detail.meta_destination_Image.url}});background-size:cover;height: 350px;">
+                  <div class="text-box ">
+                    <h1 class=" py-3">{{detail.meta_destination_name}}</h1>
+                    <a target="_blank" href="https://www.google.com/maps/dir/{{tourist_lat}},{{tourist_lon}}/{{dest_lat}},{{dest_lon}}/" class="hero-btn">GET DIRECTIONS</a>
+                  </div>
+      </div>
+    </div>
+      <div class="col-lg-6" style="padding-left: 32px;">
+          <!-- <div class="container mt-5" style="float:right;width:500;height:700;background-color:red"> -->
+                  {{map|safe}}
+              <!-- </div> -->
+      </div>
+    </div>
+</div>
+
+
+  <div class="myJumbotron container-fluid d-flex justify-content-center bg-white shadow" data-aos="fade-right" style="width:60%;margin-top: 50px;">
+    
+      <section class="pt-0">
+        <h1 style="margin: 1em 0 0.5em 0;
+    color:#e74c3c;   
+    font-size: 40px;
+    text-transform: uppercase;
+    position:absolute;
+    
+      left:50%;
+      transform:translate(-50%,-50%);
+      opacity:0.8;
+      z-index:-1;"> EXTRA INFO</h1>
+          <h1 class="text-center" style="color:#bcc550;padding-top: 90px;">Minimum distance from your location: {{distance |floatformat:2}} km</h1>
+          <h3 class="px-3 heading-orange" style="text-align: left;margin: 1em 0 0.5em 0;
+            font-weight: normal;
+            font-family: 'Ultra', sans-serif;   
+            text-transform: uppercase;
+            text-shadow: 0 2px white, 0 3px #777;">About</h3>
+          <p class="px-3 py-4 h4" style="text-align:justify"><em>{{detail.meta_destination_desc}}</em>
+          </p>
+          <h3 class="px-3 py-1 heading-orange" style="text-align: left;margin: 1em 0 0.5em 0;
+            font-weight: normal;
+            font-family: 'Ultra', sans-serif;   
+            text-transform: uppercase;
+            text-shadow: 0 2px white, 0 3px #777;">Extra&nbsp;&nbsp;Availables</h3>
+          <p class="px-3 py-4 h4" style="text-align:justify"><em>{{detail.destination_extras}}</em>
+          </p>
+      </section>
+  </div>
+{% endfor %}
+{% endblock body %}
