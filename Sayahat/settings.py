@@ -26,7 +26,7 @@ SECRET_KEY = '8yn0a6(1(*t8*vvfl###$%boy^w95jn$=n5#=)6()9sdj!f-xn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sayahat.herokuapp.com']
 
 
 # Application definition
